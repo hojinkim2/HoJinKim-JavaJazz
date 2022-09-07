@@ -1,0 +1,48 @@
+import java.awt.*;
+import java.awt.Image.*;
+import java.io.*;
+import javax.imageio.*;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+
+public class CDI extends JFrame {
+    CDI() {
+        setTitle("Image Draw");
+
+        class MyPanel extends JPanel {
+            BufferedImage karin, nicky;
+
+            public MyPanel() {
+                try {
+                    karin = ImageIO.read(new File("karin.png"));
+                    nicky = ImageIO.read(new File("nicky.png"));
+                } catch (IOException e) {
+                }
+            }
+
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                g.setClip(30, 20, 500, 300);
+
+                g.drawImage(karin, 0, 0, null);
+
+                g.setColor(Color.GREEN);
+
+                g.drawRect(20, 10, 300, 200);
+
+                g.drawImage(nicky, 40, 20, null);
+            }
+        }
+
+        add(new MyPanel());
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1000, 1000);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new CDI();
+    }
+}
