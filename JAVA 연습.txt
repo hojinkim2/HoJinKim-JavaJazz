@@ -1,0 +1,211 @@
+// JAVA_JAZZ Developer HoJin Kim
+
+// 1.
+
+import javax.swing.*;
+import java.awt.*;
+
+public class ccss extends JFrame {
+
+    public ccss() {
+        setTitle("배경색 바꾸기");
+        JButton bt = new JButton("클릭");
+        JPanel panel = new JPanel();
+        panel.add(bt);
+        add(panel);
+        bt.addActionListener(e -> {
+            if (panel.getBackground() == Color.YELLOW)
+                panel.setBackground(null);
+            else
+                panel.setBackground(Color.YELLOW);
+        });
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 100);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new ccss();
+    }
+}
+
+// 2.
+
+//p_687_문제02번 소스코드
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Temperature extends JFrame {
+    public Temperature() {
+        setTitle("섭씨->화씨 변환");
+
+        JPanel p1 = new JPanel();
+        JLabel cLabel = new JLabel("섭씨", JLabel.LEFT);
+        JTextField cTemp = new JTextField(10);
+        p1.add(cLabel);
+        p1.add(cTemp);
+
+        JPanel p2 = new JPanel();
+        JLabel fLabel = new JLabel("화씨", JLabel.LEFT);
+        JTextField fTemp = new JTextField(10);
+        fTemp.setEditable(false); // 입력못하게 만드는 코드
+        p2.add(fLabel);
+        p2.add(fTemp);
+
+        JPanel p3 = new JPanel();
+        JButton b = new JButton("변환");
+        p3.add(b);
+
+        b.addActionListener(e -> {
+            if (cTemp.getText().isEmpty())
+                fTemp.setText("?"); // 입력 안할시 표시되는 값
+            else {
+                String s = cTemp.getText();
+                double c = Double.parseDouble(s);
+                double f = c * 9.0 / 5.0 + 32; // 화씨 계산식
+                fTemp.setText("" + f + "℉"); // 화씨 결과값 + "℉" 기호
+            }
+        });
+
+        JPanel panel = new JPanel();
+
+        add(p1, BorderLayout.NORTH); // 섭씨 입력값이 위쪽
+        add(p2, BorderLayout.CENTER); // 화씨 가운데
+        add(p3, BorderLayout.SOUTH); // 변환 버튼 아래
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 140);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Temperature();
+    }
+
+}
+
+// 3.
+
+//package chap15;
+
+import java.awt.event.*;
+import java.awt.*;
+
+import javax.lang.model.util.ElementScanner6;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+
+public class JRB extends JFrame {
+
+    public JRB() {
+        JRadioButton[] pet = new JRadioButton[3];
+        String[] name = { "김현식", "땅땅이", "새대갈" };
+        ImageIcon[] image = { new ImageIcon("현식이.png"), new ImageIcon("땅땅이.png"), new ImageIcon("새대갈.png") };
+        JLabel label = new JLabel();
+        setTitle("애완 동물");
+
+        ButtonGroup bg = new ButtonGroup();
+        JPanel p2 = new JPanel();
+        for (int i = 0; i < pet.length; i++) {
+            pet[i] = new JRadioButton(name[i]);
+            bg.add(pet[i]);
+            p2.add(pet[i]);
+            pet[i].addItemListener(e -> {
+                if (e.getStateChange() == ItemEvent.DESELECTED)
+                    return;
+                else if (pet[0].isSelected())
+                    label.setIcon(image[0]);
+                else if (pet[1].isSelected())
+                    label.setIcon(image[1]);
+                else
+                    label.setIcon(image[2]);
+            });
+        }
+
+        pet[0].setSelected(true);
+        add(p2, BorderLayout.NORTH);
+
+        JPanel p3 = new JPanel();
+        p3.add(label);
+        add(p3, BorderLayout.CENTER);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 400);
+        setVisible(true);
+
+    }
+
+    public static void main(String[] args) {
+        new JRB();
+    }
+}
+
+// 4.
+
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class CDT extends JFrame {
+    public CDT() {
+        setTitle("클리핑 영역 움직이기");
+
+        MyPanel p = new MyPanel();
+        add(p);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1000, 1000);
+        setVisible(true);
+    }
+
+    class MyPanel extends JPanel {
+        int x, y;
+        BufferedImage img;
+
+        public MyPanel() {
+            try {
+                img = ImageIO.read(new File("새대갈.png"));
+            } catch (IOException e) {
+            }
+            addMouseMotionListener(new MyMouseListener());
+        }
+
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setClip(x, y, 300, 300);
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+        }
+
+        class MyMouseListener implements MouseMotionListener {
+            public void mouseDragged(MouseEvent e) {
+                x = e.getX();
+                y = e.getY();
+                repaint();
+            }
+
+            public void mouseMoved(MouseEvent e) {
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new CDT();
+    }
+}
