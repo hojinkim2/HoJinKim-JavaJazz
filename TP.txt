@@ -1,0 +1,29 @@
+// Coding By HJK
+
+class Telephone {
+    // model , value 라는 필드와 print() 메서드를 가진 클래스
+    String model; // 문자열
+    int value; // 정수
+
+    void print() {
+        System.out.println(value + "만 원짜리 " + model + " 스마트폰"); // "oo" 만 원짜리 "oo" 스마트폰 출력
+    }
+}
+
+public class TP {
+    public static void main(String[] args) {
+        Telephone myPhone = new Telephone(); // Phone 타입의 객체 생성 후 myPhone 참조 변수에 대입
+        // 객체의 필드에 값을 대입
+        myPhone.model = "갤럭시 S8";
+        myPhone.value = 100;
+        // 객체의 메서드 호출
+        myPhone.print();
+
+        Telephone yourPhone = new Telephone(); // Phone 타입의 객체 생성 후 yourPhone 참조 변수에 대입
+        // 객체의 필드에 값을 대입
+        yourPhone.model = "G6";
+        yourPhone.value = 85;
+        // 객체의 메서드 호출
+        yourPhone.print();
+    }
+}
