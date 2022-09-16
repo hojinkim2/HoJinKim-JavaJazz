@@ -1,0 +1,21 @@
+class Circle {
+    double radius; // 초기화하지 않았으므로 기본값 0.0
+
+    double findArea() {
+        return 3.14 * radius * radius; // 클래스 멤버에 접근 radius 대신 this.radius 사용가능
+    }
+
+    void show(double x, double y) {
+        System.out.printf("반지름 = %.1f, 넓이 = %.1f\n", x, y); // %.1f 소수점 이하 1자리까지 표현
+    }
+}
+
+public class CircleDemo {
+    public static void main(String[] args) {
+        Circle myCircle = new Circle(); // 생성자 호출 Circle 객체 생성
+
+        myCircle.radius = 10.0; // myCircle 객체의 radius필드
+
+        myCircle.show(myCircle.radius, myCircle.findArea()); // myCircle 객체의 show()와 findArea() 메서드 의미
+    }
+}

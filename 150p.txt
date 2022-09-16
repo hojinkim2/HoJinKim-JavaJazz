@@ -1,0 +1,94 @@
+class CircleS {
+    double radius;
+    String color;
+
+    public CircleS(double radius, String color) {
+        this.radius = radius;
+        this.color = color;
+    }
+
+    public CircleS(double radius) {
+        this(radius, "파랑");
+    }
+
+    public CircleS(String color) {
+        this(10.0, color);
+    }
+
+    public CircleS() {
+        this(10.0, "빨강");
+    }
+
+    public CircleS(String color, double radius) {
+        this(10.0, "노랑");
+    }
+}
+
+public class Circle06 {
+    public static void main(String[] args) {
+        CircleS c1 = new CircleS(10.0, "빨강");
+        System.out.println(c1);
+
+        CircleS c2 = new CircleS(5.0);
+        System.out.println(c2);
+
+        CircleS c3 = new CircleS("노랑");
+        System.out.println(c3);
+
+        CircleS c4 = new CircleS();
+        System.out.println(c4);
+
+        CircleS c5 = new CircleS();
+        System.out.println(c5);
+
+        CircleS c6 = new CircleS();
+        System.out.println(c6);
+    }
+}
+
+// class CircleS {
+// double radius;
+// String color;
+
+// public CircleS(double r, String c) {
+// radius = r;
+// color = c;
+// }
+
+// public CircleS(double r) {
+// radius = r;
+// color = "파랑";
+// }
+
+// public CircleS(String c) {
+// radius = 10.0;
+// color = c;
+// }
+
+// public CircleS() {
+// radius = 10.0;
+// color = "빨강";
+// }
+// }
+
+// public class Circle06 {
+// public static void main(String[] args) {
+// CircleS c1 = new CircleS(10.0, "빨강");
+// System.out.println(c1);
+
+// CircleS c2 = new CircleS(5.0);
+// System.out.println(c2);
+
+// CircleS c3 = new CircleS("노랑");
+// System.out.println(c3);
+
+// CircleS c4 = new CircleS();
+// System.out.println(c4);
+
+// CircleS c5 = new CircleS();
+// System.out.println(c5);
+
+// CircleS c6 = new CircleS();
+// System.out.println(c6);
+// }
+// }
