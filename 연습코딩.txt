@@ -1,0 +1,57 @@
+/*
+* Coding By HJK
+*/
+
+class CircleG {
+    double radius;
+    static int numOfCircles = 0; // 정적 변수
+    int numCircles = 0;
+
+    public CircleG(double radius) {
+        this.radius = radius;
+        numOfCircles++; // 객체를 생성할 때마다 하나씩 증가
+        numCircles++; // 객체를 생성할때마다 증가하지만, 객체마다 별도의 기억공간을 사용하기 때문에 항상 0에서 증가
+    }
+}
+
+public class Circle07 {
+    public static void main(String[] args) {
+        CircleG myCircle = new CircleG(10.0);
+        CircleG yourCircle = new CircleG(5.0);
+
+        // print(); // main() 메서드는 정적 메서드이므로 인스턴스 메서드를 호출할 수 없다
+        System.out.println("원의 개수 : " + CircleG.numOfCircles); // 정적 변수 사용
+        System.out.println("원의 개수 : " + yourCircle.numCircles);
+    }
+
+    void print() {
+        System.out.println("인스턴스 메서드입니다.");
+    }
+}
+
+class Util {
+    static int fourTimes(int i) {
+        return i * 4; // 정적 메서드
+    }
+}
+
+public class UtilDemo {
+    public static void main(String[] args) {
+        System.out.println(Util.fourTimes(5)); // Util.fourTimes(5) 정적 메서드를 호출
+}
+
+
+public class OneToThousand {
+    static int sumOneToThousand;
+
+    static {
+        int sum = 0;
+        for (int i = 1; i <= 1000; i++) // 정적 블록으로 정적 변수를 초기화
+            sum += i;
+        sumOneToThousand = sum;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(sumOneToThousand);
+    }
+}
