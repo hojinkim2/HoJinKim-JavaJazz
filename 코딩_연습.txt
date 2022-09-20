@@ -1,0 +1,364 @@
+//도전과제
+//1번
+
+class Printer {
+    int numOfPapers = 0;
+
+    public void print(int amount) {
+        numOfPapers -= amount;
+    }
+}
+
+public class PrinterTest {
+    public static void main(String[] args) {
+        Printer p = new Printer();
+        p.numOfPapers = 100;
+        p.print(70);
+        System.out.println(p.numOfPapers);
+    }
+}
+
+//2번
+
+class Printer2 {
+    private int numOfPapers;
+
+    public Printer2(int n) {
+        numOfPapers = n;
+    }
+
+    void print(int amount) {
+        if (numOfPapers >= amount) {
+            System.out.println(amount + "장 출력했습니다. 현재 " + (numOfPapers -= amount) + "장 남아있습니다.");
+        } else if (numOfPapers <= 0) {
+            System.out.println("용지가 없습니다.");
+        } else if (numOfPapers < amount) {
+            System.out.println("모두 출력하려면 용지가 " + (amount - numOfPapers) + "매 부족합니다. " + numOfPapers + "장 남아있습니다.");
+            numOfPapers -= numOfPapers;
+        }
+    }
+}
+
+public class PrinterTest2 {
+    public static void main(String[] args) {
+        Printer2 p = new Printer2(10);
+        p.print(2);
+        p.print(20);
+        p.print(10);
+    }
+}
+
+//3번
+
+class PrinterD {
+    private int numOfPapers;
+    private boolean duplex;
+
+    public PrinterD(int numOfPapers, boolean duplex) {
+        this.numOfPapers = numOfPapers;
+        this.duplex = duplex;
+    }
+
+    public void print(int amount) {
+        if (getDuplex()) {
+            amount = (amount % 2 == 0) ? amount / 2 : amount / 2 + 1;
+            System.out.print("양면으로 ");
+        } else
+            System.out.print("단면으로 ");
+
+        if (numOfPapers == 0) {
+            System.out.println("용지가 없습니다.");
+        } else if (numOfPapers < amount) {
+            System.out.printf("모두 출력하려면 용지가 " + (amount - numOfPapers) + "매 부족합니다.");
+            System.out.println(numOfPapers + "장만 출력합니다.");
+            numOfPapers = 0;
+        } else {
+            numOfPapers -= amount;
+            System.out.print(amount + "장 출력했습니다.");
+            System.out.println("현재 " + numOfPapers + "장 남아있습니다.");
+        }
+    }
+
+    public boolean getDuplex() {
+        return duplex;
+    }
+
+    public void setDuplex(boolean duplex) {
+        this.duplex = duplex;
+    }
+}
+
+public class PrinterDemo {
+    public static void main(String[] args) {
+        PrinterD p = new PrinterD(20, true);
+        p.print(25);
+        p.setDuplex(false);
+        p.print(10);
+    }
+}
+
+
+
+//1번
+
+class Triangle {
+    double base, height;
+
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    public double getBase() {
+        return base;
+    }
+
+    public double getHeight() {
+        return = height;
+    }
+
+    public double findAria() {
+        return base * height / 2;
+    }
+
+}
+
+public class TriangleTest {
+    public static void main(String[] args) {
+        Triangle t = new Triangle(10.0, 5.0);
+        System.out.println(t.findAria());
+    }
+}
+
+
+//2번
+
+class Triangled {
+    double base, height;
+
+    public Triangled(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    public double getBase() {
+        return base;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double findAria() {
+        return base * height / 2;
+    }
+
+    public boolean isSameArea(Triangled t) {
+        return this.findAria() == t.findAria();
+    }
+
+}
+
+public class TriangleTest2 {
+    public static void main(String[] args) {
+        Triangled t1 = new Triangled(10.0, 5.0);
+        Triangled t2 = new Triangled(5.0, 10.0);
+        Triangled t3 = new Triangled(8.0, 8.0);
+        System.out.println(t1.findAria());
+        System.out.println(t1.isSameArea(t2));
+        System.out.println(t1.isSameArea(t3));
+    }
+}
+
+
+//3번
+
+public class Customer {
+    private String name, id, passwd;
+    private int age;
+
+    public Customer(String name, String id, String passwd, int age) {
+        this.name = name;
+        this.id = id;
+        this.passwd = passwd;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName() {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+
+//4번
+
+class Car {
+    String color;
+    static int numOfCar = 0;
+    static int numOfRedCar = 0;
+
+    public Car(String color) {
+        this.color = color;
+        numOfCar++;
+        if (color.compareToIgnoreCase("red") == 0)
+            numOfRedCar++;
+    }
+
+    public static int getNumOfCar() {
+        return numOfCar;
+    }
+
+    public static int getNumOfRedCar() {
+        return numOfRedCar;
+    }
+}
+
+public class CarTest {
+    public static void main(String[] args) {
+        Car c1 = new Car("red");
+        Car c2 = new Car("blue");
+        Car c3 = new Car("RED");
+
+        System.out.printf("자동차 수 : " + Car.getNumOfCar() + ", 빨간색 자동차 수 : " + Car.getNumOfRedCar());
+    }
+}
+
+//5번
+
+class Line {
+    int length;
+
+    public Line(int length) {
+        this.length = length;
+    }
+
+    boolean isSameLine(Line o) {
+        return o.length == length;
+    }
+}
+
+public class LineTest {
+    public static void main(String[] args) {
+        Line a = new Line(1);
+        Line b = new Line(1);
+
+        System.out.println(a.isSameLine(b));
+        System.out.println(a == b);
+    }
+}
+
+
+// 6번
+
+class Complex {
+    double r, g;
+
+    public Complex(double r, double g) {
+        this.r = r;
+        this.g = g;
+    }
+
+    public Complex(double r) {
+        this(r, 0.0);
+    }
+
+    public String print() {
+        return r + " + " + g + "i";
+    }
+}
+
+public class ComplexTest {
+    public static void main(String[] args) {
+        Complex c1 = new Complex(2.0);
+        System.out.println(c1.print());
+        Complex c2 = new Complex(1.5, 2.5);
+        System.out.println(c2.print());
+    }
+}
+
+
+// 7번 
+
+class GolfClub {
+    String kind;
+    int number;
+
+    GolfClub(int number) {
+        this.kind = "아이언";
+        this.number = number;
+    }
+
+    GolfClub(String kind) {
+        this.kind = kind;
+        this.number = 0;
+    }
+
+    GolfClub() {
+        this.number = 7;
+    }
+
+    void print() {
+        if (number == 0)
+            System.out.println(kind + "입니다\n");
+        else
+            System.out.printf(number + "번 아이언입니다.\n");
+    }
+}
+
+public class GolfClubTest {
+    public static void main(String[] args) {
+        GolfClub g1 = new GolfClub();
+        g1.print();
+
+        GolfClub g2 = new GolfClub(8);
+        g2.print();
+
+        GolfClub g3 = new GolfClub("퍼터");
+        g3.print();
+    }
+}
+
+
+// 8번
+class Dice {
+    int face;
+
+    int roll() {
+        return (int) (Math.random() * 6) + 1;  // 랜덤 숫자 1 ~ 6
+    }
+}
+
+public class DiceTest {
+    public static void main(String[] args) {
+        Dice d = new Dice();  // 객체 생성
+        System.out.println("주사위의 숫자 : " + d.roll()); // 출력 숫자
+    }
+}
